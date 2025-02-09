@@ -7,6 +7,11 @@ import { queryRouter } from "./queryRouter";
 import { createCalendarEvent } from "./createCalendarEvent";
 
 async function main() {
+  await Promise.all([
+    ollama.pull({ model: "llama3.2:3b" }),
+    ollama.pull({ model: "gemma2:2b" }),
+  ]);
+
   const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout,

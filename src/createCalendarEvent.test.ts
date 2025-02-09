@@ -57,4 +57,20 @@ describe("create calendar event", () => {
       ),
     ).toBeTruthy();
   });
+  it("should create an event with a relative end time", async () => {
+    await createCalendarEvent(
+      "I'm going to hamburg on the 8th of May this year, I will be there for 6 days",
+    );
+    const file = readFileSync(path.resolve(__dirname, "../out.ics")).toString();
+    expect(
+      file.includes(
+        `DTSTART;TZID=Europe/London:${new Date().getFullYear()}0508T000000`,
+      ),
+    ).toBeTruthy();
+    expect(
+      file.includes(
+        `DTEND;TZID=Europe/London:${new Date().getFullYear()}0514T235959`,
+      ),
+    ).toBeTruthy();
+  });
 });
