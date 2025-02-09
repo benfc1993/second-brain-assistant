@@ -1,0 +1,54 @@
+Run Dec server with turbopack
+Authentication
+Zod
+collapsed:: true
+```typescript
+const user = await trpc.auth.login.mutate({
+    name: 'Ben',
+    password: 'pazzword',
+  })
+
+  const message = await trpc.greeting.hello.query()
+
+```
+[Cache logging](https://nextjs.org/docs/app/api-reference/next-config-js/logging)
+Suspense boundries are very good for perf
+next dev --turbo
+[Session management - cookies](https://nextjs.org/docs/app/building-your-application/authentication#cookie-based-sessions)
+schema first types for any 'interface like' situations.
+type safety at run time for both input and output
+Use parallel routes for tabs
+[Authorisation Middleware](https://nextjs.org/docs/app/building-your-application/authentication#authorization)
+need to perf test against just calling services direct.
+works with app router.
+Partial prerendering
+collapsed:: true
+potentially harder to read code.
+catch errors from external services early, don't need to do this manually.
+```typescript
+const addressSchema = z.object({
+  number: z.string(),
+  street: z.string(),
+  postCode: z.string().min(6).max(6),
+})
+
+type Address = z.infer<typeof addressSchema>
+
+const userSchema = z.object({
+  name: z.string(),
+  password: z.string(),
+  email: z.string().optional(),
+  adderss: addressSchema,
+})
+
+export type User = z.infer<typeof userSchema>
+```
+can store user data in encrypted cookies
+do the benefits make it worth using, is it just a 'fun' thing to use
+Keeps tab content as server components for data fetching
+[[Trpc]]
+
+will suspend any components within the boundary until all data returned
+will need to educate / monitor correct use
+type safety in dev
+can make very clear domains:
